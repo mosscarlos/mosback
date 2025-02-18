@@ -40,8 +40,8 @@ const estadisticaController = {
         puntajeTotal += puntos;
 
         if (puntos === 3) partidosGanados++;
-        else if (puntos === 1) partidosEmpatados++;
-        else if (puntos === 0) partidosPerdidos++;
+        else if (puntos === 2) partidosEmpatados++;
+        else if (puntos === 1) partidosPerdidos++;
       });
 
       const estadisticas = {
@@ -57,7 +57,7 @@ const estadisticaController = {
       console.error("5. Error detallado:", {
         message: error.message,
         stack: error.stack,
-        sqlMessage: error.sqlMessage, // Si es un error de MySQL
+        sqlMessage: error.sqlMessage, 
       });
 
       res.status(500).json({

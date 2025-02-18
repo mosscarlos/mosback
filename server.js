@@ -2,7 +2,6 @@ require('dotenv').config();
 const express = require('express');
 const cors = require('cors');
 const path = require('path');
-const bodyParser = require('body-parser');
 const app = express();
 const db = require('./config/db');
 
@@ -22,15 +21,22 @@ const uploadRoutes = require('./routes/uploadRoutes');
 const competicionRoutes = require('./routes/competicionRoutes');
 const puntajesRoutes = require('./routes/puntajeRoutes');
 const estadisticaRoutes = require('./routes/estadisticaRoutes');
+const extrasRoutes = require('./routes/extrasRoutes');
 
+// Configuración de middleware
 app.use(cors());
 app.set('db', db);
-  app.use(bodyParser.json());
-app.use(bodyParser.urlencoded({ extended: true }));
-app.use(express.json({ limit: '50mb' }));
-app.use(express.urlencoded({ limit: '50mb', extended: true }));
 
-// Rutas existentes
+// Configuración de límites para el parsing de solicitudes
+// Aumentado a 100mb para manejar cargas más grandes
+app.use(express.json({ limit: '100mb' }));
+app.use(express.urlencoded({ 
+    limit: '100mb', 
+    extended: true,
+    parameterLimit: 50000 
+}));
+
+// Rutas
 app.use('/api/torneos', torneoRoutes);
 app.use('/api/equipos', equipoRoutes);
 app.use('/api/partidos', partidoRoutes);
@@ -46,7 +52,10 @@ app.use('/api/estadisticas', estadisticaRoutes);
 app.use('/api/torneo-disciplinas', torneoDisciplinaRoutes);
 app.use('/api/disciplina-categorias', disciplinaCategoriaRoutes);
 app.use('/api/upload', uploadRoutes);
+app.use('/api/extras', extrasRoutes);
 
 app.listen(5000, () => {
   console.log('Servidor iniciado en http://localhost:5000');
 });
+
+module.exports = app;

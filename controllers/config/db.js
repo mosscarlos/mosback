@@ -4,7 +4,7 @@ const db = mysql.createConnection({
   host: 'localhost',
   user: 'root',
   password: 'admin',
-  database: 'moss_sportv2',
+  database: 'deportivo',
 });
 
 const dbPromise = db.promise();
