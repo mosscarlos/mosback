@@ -3,7 +3,13 @@ const Resultado = require('../models/Resultado');
 // Renombrar getResultados a getAllResultados para coincidir con la ruta
 exports.getAllResultados = async (req, res) => {
   try {
-    const resultados = await Resultado.findAll();
+    // Usa valores por defecto o pásalos como parámetros en la consulta
+    const equipo_id = req.query.equipo_id || 1;
+    const torneo_id = req.query.torneo_id || 1;
+
+    // Llama a la función correcta del modelo
+    const resultados = await Resultado.getByEquipoAndTorneo(equipo_id, torneo_id);
+
     res.status(200).json({
       success: true,
       data: resultados
@@ -17,6 +23,7 @@ exports.getAllResultados = async (req, res) => {
     });
   }
 };
+
 
 exports.createResultado = async (req, res) => {
   try {
