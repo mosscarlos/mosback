@@ -54,8 +54,11 @@ app.use('/api/disciplina-categorias', disciplinaCategoriaRoutes);
 app.use('/api/upload', uploadRoutes);
 app.use('/api/extras', extrasRoutes);
 
-app.listen(5000, () => {
-  console.log('Servidor iniciado en http://localhost:5000');
+const PORT = process.env.PORT || 5000; // Usa el puerto de Render o el 5000 por defecto
+
+app.listen(PORT, '0.0.0.0', () => {
+  console.log(`Servidor corriendo en el puerto ${PORT}`);
 });
+
 
 module.exports = app;
