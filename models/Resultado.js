@@ -1,4 +1,6 @@
 // models/Resultado.js
+const db = require('../config/db'); // Asegúrate de que la ruta sea correcta
+
 const Resultado = {
   // Obtener resultados por equipo y torneo
   getByEquipoAndTorneo: async (equipo_id, torneo_id) => {
@@ -31,3 +33,6 @@ const Resultado = {
     }
   }
 };
+
+// Exportar correctamente
+module.exports = Resultado;
