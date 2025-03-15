@@ -1,7 +1,6 @@
 const bcrypt = require("bcrypt");
 const jwt = require("jsonwebtoken");
 const Usuario = require("../models/Usuario");
-const db = require('../db'); // Asegúrate de que la ruta sea correcta
 
 
 const JWT_SECRET = process.env.JWT_SECRET || "Error no hay clave secreta";
